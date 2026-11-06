@@ -1,0 +1,55 @@
+==============================================================================
+DEV-2208  rows=6749  versions=3.4.2  OS=Windows 10 22H2
+  log window 2026-10-14T07:30:00.000Z -> 2026-10-14T14:59:55.345Z
+  [HIGHEST] CLASSIFIER-CRASH
+      3 fail-fast crash(es), 122 connections passed unfiltered in total
+      - exit 0xC0000409 at 08:12:50Z  restart #1 2026-10-14T08:13:10.000Z  filter back 2026-10-14T08:13:11.000Z (down ~21.0 s)  fail-open=36 connections
+          last classify : 2026-10-14T08:12:41.000Z https://www3.nhk.example.jp/news/html/20261014/k1001.html charset=utf-8 bytes=18233 -> truncated to 4096 bytes
+          dump          : C:\ProgramData\Scudio\dumps\ScudioFilter_20261014_081310.dmp
+      - exit 0xC0000409 at 10:28:04Z  restart #2 2026-10-14T10:28:20.000Z  filter back 2026-10-14T10:28:21.000Z (down ~17.0 s)  fail-open=38 connections
+          last classify : 2026-10-14T10:27:55.000Z https://news.yahoo.example.jp/articles/8f2c1a charset=shift_jis bytes=31877 -> truncated to 4096 bytes
+          dump          : C:\ProgramData\Scudio\dumps\ScudioFilter_20261014_102820.dmp
+      - exit 0xC0000409 at 13:02:39Z  restart #3 2026-10-14T13:02:55.000Z  filter back 2026-10-14T13:02:56.000Z (down ~17.0 s)  fail-open=48 connections
+          last classify : 2026-10-14T13:02:30.000Z https://www.asahi.example.jp/articles/ASR9 charset=euc-jp bytes=27402 -> truncated to 4096 bytes
+          dump          : C:\ProgramData\Scudio\dumps\ScudioFilter_20261014_130255.dmp
+  checked and ruled out:
+      DNS lookup slow x270 (ignored - SCU-106 (Won't fix), cosmetic)
+      SSL bypass pinned cert x212 (ignored - expected behaviour for pinned certs)
+      severity>=3 lines: 0   text truncation events: 6
+==============================================================================
+DEV-3390  rows=29297  versions=3.4.1,3.4.2  OS=Windows 11 23H2
+  log window 2026-10-15T06:50:00.000Z -> 2026-10-15T08:39:59.972Z
+  [HIGH] POLICY-RELOAD-LOOP
+      versions=3.4.2  9419 reloads (9419 'unchanged'), 9419 policy.json writes
+      2026-10-15T08:00:00.000Z -> 2026-10-15T08:39:59.939Z  peak 236/min, avg 3.92/s, 40 min over threshold, 28257 telemetry rows, still looping at end of log: True
+  checked and ruled out:
+      DNS lookup slow x49 (ignored - SCU-106 (Won't fix), cosmetic)
+      SSL bypass pinned cert x30 (ignored - expected behaviour for pinned certs)
+      severity>=3 lines: 0   text truncation events: 0
+==============================================================================
+DEV-3391  rows=22359  versions=3.4.1,3.4.2  OS=Windows 10 22H2
+  log window 2026-10-16T12:10:00.000Z -> 2026-10-16T13:59:59.948Z
+  [HIGH] POLICY-RELOAD-LOOP
+      versions=3.4.2  7055 reloads (7055 'unchanged'), 7055 policy.json writes
+      2026-10-16T13:30:00.000Z -> 2026-10-16T13:59:59.915Z  peak 237/min, avg 3.92/s, 30 min over threshold, 21165 telemetry rows, still looping at end of log: True
+  checked and ruled out:
+      DNS lookup slow x53 (ignored - SCU-106 (Won't fix), cosmetic)
+      SSL bypass pinned cert x37 (ignored - expected behaviour for pinned certs)
+      severity>=3 lines: 0   text truncation events: 0
+==============================================================================
+DEV-4471  rows=7045  versions=3.4.2  OS=Windows 11 23H2
+  log window 2026-10-12T18:02:11.000Z -> 2026-10-13T11:59:59.758Z
+  [HIGH] LICENSE-CACHE-STALE
+      session started 2026-10-12T18:02:15.000Z (v3.4.2, Windows 11 23H2)
+      cache at start : LicenseCache: loaded status=Unknown from storage, effective=Inactive
+      licence Active : 2026-10-12T18:02:17.640Z  <- 'Policy fetch OK version=1 rules=38 orgLicense=Active'
+      still blocked  : 4625 connections / 230 block pages on 17 hosts, 2026-10-12T18:02:20.347Z -> 2026-10-13T09:41:05.121Z (15.65 h)
+  checked and ruled out:
+      DNS lookup slow x126 (ignored - SCU-106 (Won't fix), cosmetic)
+      SSL bypass pinned cert x64 (ignored - expected behaviour for pinned certs)
+      severity>=3 lines: 0   text truncation events: 0
+==============================================================================
+SUMMARY
+  CLASSIFIER-CRASH       1 device(s): DEV-2208
+  POLICY-RELOAD-LOOP     2 device(s): DEV-3390, DEV-3391
+  LICENSE-CACHE-STALE    1 device(s): DEV-4471
